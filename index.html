@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Wolfuix</title>
+    <link rel="stylesheet" href="dist/app.css">
+    <script async defer src="dist/app.js"></script>
+</head>
+<body>
+
+<nav>
+    <img src="img/wolfuix-logo.svg" alt="" width=48 height=48>
+    <div class="nav__wolfuix">Wolfuix</div>
+</nav>
+
+<h2>Introduction</h2>
+
+<p>
+    Wolfuix is a <u><strong>lightweight</strong></u> JS framework.
+    It includes some polyfills, components and tools.
+    Down below you can find some examples.
+</p>
+<p>
+    If you use Wolfuix alongside with the webpack, then you will ensure compatibility with <strong>IE10+</strong>.
+</p>
+
+<h2>Examples</h2>
+
+<div class="tab-layout">
+    <div class="tab-layout__nav">
+        <div id="tab1-btn-counter">Counter app</div>
+        <div id="tab1-btn-array_to_object">Array.prototype.toObject()</div>
+        <div id="tab1-btn-form-data">WolfuixFormData</div>
+    </div>
+    <div class="tab-layout__containers">
+        <div id="tab1-container-counter">
+            <pre id="code__counter_app"></pre>
+        </div>
+        <div id="tab1-container-array_to_object">
+            <pre id="code__array_prototype_toObject"></pre>
+        </div>
+        <div id="tab1-container-form-data">
+            <pre id="code__form_data"></pre>
+        </div>
+    </div>
+</div>
+
+<h2>Counter app example</h2>
+
+<div class="text-center">
+    <button id="add-btn" class="btn">Click on me!</button>
+    <br>Button has been clicked <strong id="test-counter">0</strong> times.
+</div>
+
+<h2>Form data</h2>
+<div class="text-center">
+    <form id="form-data-test" action="/index.html" method="post">
+        <input type="text" name="name" id="form-data-name" placeholder="name"><br>
+        <input type="text" name="surname" id="form-data-surname" placeholder="surname"><br>
+        <button id="form-data-submit" class="btn" type="submit">Submit</button>
+    </form>
+    <p id="form-data-output"></p>
+</div>
+
+<h2>Deserializing string</h2>
+    <div class="text-center">
+        <input type="text" placeholder="Click on that blue button :)" value="" id="deserialize-string" readonly>
+        <p id="deserialized-string"></p>
+        <button id="deserialize-string-btn" class="btn">Generate</button>
+    </div>
+</body>
+</html>

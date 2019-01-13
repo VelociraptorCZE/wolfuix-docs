@@ -1,0 +1,110 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: Segoe UI Light, sans-serif;
+}
+
+body {
+    margin: 5rem 0;
+}
+
+h1, h2, h3, h4, h5, p {
+    margin: 1rem;
+}
+
+.tab-layout {
+    width: 100%;
+    margin: auto;
+}
+
+.tab-layout__nav {
+    background: #1a1a1a;
+    color: #fff;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.tab-layout__nav > div {
+    padding: 16px;
+    cursor: pointer;
+    transition: .3s;
+    user-select: none;
+}
+
+.tab-layout__nav > div:hover {
+    background: #5c5c5c;
+}
+
+.tab-layout__nav > div.active {
+    background: #6f6f6f;
+}
+
+nav {
+    background: #2c2c2c;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    display: flex;
+    align-items: center;
+}
+
+nav > img {
+    margin: .2rem;
+}
+
+.nav__wolfuix {
+    color: #fff;
+    font-size: 2rem;
+}
+
+pre {
+    font-family: Consolas, sans-serif;
+    overflow: auto;
+    padding: .5rem;
+    color: #fff;
+    height: 300px;
+    font-size: 14px;
+    background: #3a3a3a;
+}
+
+.btn {
+    margin: 1rem;
+    padding: .7rem;
+    transition: .5s;
+    background: #329ae7;
+    border: none;
+    outline: none;
+    font-weight: 500;
+    color: #fff;
+    font-size: 1.1rem;
+    cursor: pointer;
+}
+
+.btn:hover {
+    background: #1574b9;
+}
+
+.btn:active {
+    background: #10588d;
+}
+
+.text-center {
+    text-align: center;
+}
+
+input[type=text] {
+    font-size: 16px;
+    padding: .7rem;
+    margin: .4rem 0;
+    width: 60%;
+    border: 1px solid #cecece;
+}
+
+input[readonly] {
+    background: #ebebeb;
+}
+
+p {
+    font-size: 17px;
+}

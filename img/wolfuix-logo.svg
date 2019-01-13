@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+<!--
+    Wolfuix
+    Copyright (c) Simon Raichl 2018 - 2019
+    MIT License
+-->
+<svg width="256mm" height="256mm" version="1.1" viewBox="0 0 256 256" xmlns="http://www.w3.org/2000/svg" xmlns:cc="http://creativecommons.org/ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+ <metadata>
+  <rdf:RDF>
+   <cc:Work rdf:about="">
+    <dc:format>image/svg+xml</dc:format>
+    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+    <dc:title/>
+   </cc:Work>
+  </rdf:RDF>
+ </metadata>
+ <g transform="translate(0,-41)">
+  <g transform="matrix(4.4874 0 0 4.8025 -357.53 -625.35)">
+   <path d="m112.64 140.11-4.4866 4.0091-1.5833-3.608-5.4096 12.16-5.674 1.8712-3.035 8.5524-12.007 7.8843 1.3195 5.0782 7.7849-1.4697 2.9028-4.2767 3.4039-0.2403 1.1986 3.0406 1.0715-3.2008 1.8471 3.0732-4.4412 4.4979 0.91334-0.9586-2.9518-1.4185 1.3568 3.068-2.5298 2.5621-3.5631 1.8707 5.0142 0.40101 6.2016-2.0045 5.278-4.1424h6.5975l5.9378 8.9535 5.1464 4.4101 4.7499-2.9404 0.13215-7.0822-0.65975-7.6171-3.035-7.6176-4.2223-5.0777 16.098-9.6216-21.772-0.6687zm-20.32 40.625 1.5874-1.6666-2.9523-1.418zm0.13164-10.424 1.2113 3.0732 1.0715-3.2014z" fill="#646452" stroke="#160000" stroke-width=".26291px"/>
+   <g fill="none" stroke="#000" stroke-width=".26458px">
+    <path d="m107.58 154.41v0.53453l0.93545-10.824"/>
+    <path d="m114.66 149.6-0.13364 8.6863 14.7-8.419"/>
+    <path d="m101.83 165.77 5.0781-2.2718 3.0736-3.6081"/>
+    <path d="m92.609 163.1 8.0181-4.1427"/>
+   </g>
+   <path d="m99.358 159.46-1.8024-1.1073-1.0299 1.3534-0.47897 1.4985z" stroke="#000" stroke-width=".24918px"/>
+  </g>
+ </g>
+</svg>
