@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-page="index">
 <head>
     <meta charset="UTF-8">
     <title>Wolfuix</title>
@@ -9,8 +9,11 @@
 <body>
 
 <nav>
-    <img src="img/wolfuix-logo.svg" alt="" width=48 height=48>
-    <div class="nav__wolfuix">Wolfuix</div>
+    <a href="index.html" class="d-flex nav__btn main-nav-btn">
+        <img src="img/wolfuix-logo.svg" alt="" width=48 height=48>
+        <div class="nav__wolfuix">Wolfuix</div>
+    </a>
+    <a class="nav__btn" href="docs.html">Docs</a>
 </nav>
 
 <h2>Introduction</h2>
@@ -34,13 +37,13 @@
     </div>
     <div class="tab-layout__containers">
         <div id="tab1-container-counter">
-            <pre id="code__counter_app"></pre>
+            <pre id="code__counter_app" class="main-pre"></pre>
         </div>
         <div id="tab1-container-array_to_object">
-            <pre id="code__array_prototype_toObject"></pre>
+            <pre id="code__array_prototype_toObject" class="main-pre"></pre>
         </div>
         <div id="tab1-container-form-data">
-            <pre id="code__form_data"></pre>
+            <pre id="code__form_data" class="main-pre"></pre>
         </div>
     </div>
 </div>

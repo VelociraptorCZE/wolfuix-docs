@@ -1,0 +1,36 @@
+.docs-tab {
+    position: fixed;
+    width: 100%;
+}
+
+.docs-container {
+    padding: calc(53px + 2rem) 2rem;
+}
+
+h1, h2, h3, h4, h5, p, pre, table {
+    margin: 2rem -1rem;
+}
+
+table {
+    width: calc(100% - 2rem);
+    border-collapse: collapse;
+    text-align: center;
+}
+
+td, th {
+    padding: .5rem;
+    border-bottom: 1px solid #dedede;
+}
+
+td:last-child {
+    text-align: left;
+}
+
+hr {
+    margin: 2rem 0;
+    border: .5px solid #000;
+}
+
+a {
+    color: #540dca;
+}

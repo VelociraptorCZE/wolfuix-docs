@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en" data-page="docs">
+<head>
+    <meta charset="UTF-8">
+    <title>Wolfuix - docs</title>
+    <link rel="stylesheet" href="dist/app.css">
+    <link rel="stylesheet" href="dist/docs.css">
+    <script async defer src="dist/app.js"></script>
+</head>
+<body class="clear-body">
+
+<nav>
+    <a href="index.html" class="d-flex nav__btn main-nav-btn">
+        <img src="img/wolfuix-logo.svg" alt="" width=48 height=48>
+        <div class="nav__wolfuix">Wolfuix</div>
+    </a>
+    <a class="nav__btn active" href="docs.html">Docs</a>
+</nav>
+
+<div class="tab-layout">
+    <div class="tab-layout__nav docs-tab">
+        <div id="tab2-btn-intro">Intro</div>
+        <div id="tab2-btn-elems">Elements</div>
+        <div id="tab2-btn-formdata">WolfuixFormData</div>
+        <div id="tab2-btn-graph">WolfuixGraph</div>
+    </div>
+
+    <div class="tab-layout__containers docs-container">
+        <div id="tab2-container-intro">
+            <p>
+                In case you are using the webpack in your project, then just include this framework as the dependency to the package.json:
+            </p>
+            <pre>"wolfuix": version</pre>
+            <p>
+                So for example version 0.8.7:
+            </p>
+            <pre>"wolfuix": "0.8.7"</pre>
+            <p>
+                Then install it:
+            </p>
+            <pre>npm install</pre>
+            <p>
+                Now you can use the Wolfuix, just import the main module in your JS:
+            </p>
+            <pre>import Wolfuix from "wolfuix/Wolfuix";
+export default class YourClass {
+    constructor() {
+        this.wolfuix = new Wolfuix();
+    }
+}</pre>
+        </div>
+        <div id="tab2-container-elems">
+            <p>
+                Working with elements is actually straightforward, you can either choose between two modules
+                - <strong>WolfuixElemTools</strong> and <strong>WolfuixElemFactory</strong>. Let's start with the first one,
+                this class has so far only one static method - createElement with four parameters.
+            </p>
+            <h2>WolfuixElemTools.createElement</h2>
+            <h3>Parameters</h3>
+            <table>
+                <tr>
+                    <th>Parameter</th>
+                    <th>Expected value</th>
+                    <th>Note</th>
+                </tr>
+                <tr>
+                    <td>name</td>
+                    <td>String</td>
+                    <td>Type of your new element, i.e. "div"</td>
+                </tr>
+                <tr>
+                    <td>attrs</td>
+                    <td>Object</td>
+                    <td>Attributes which will append with your new element, i.e. { "data-attr": "value" }</td>
+                </tr>
+                <tr>
+                    <td>children</td>
+                    <td>Array</td>
+                    <td>List of children to append inside your new element, value in the array has to be instance of Node.</td>
+                </tr>
+                <tr>
+                    <td>content</td>
+                    <td>String</td>
+                    <td>Appends a html code before your children. If the parameter <strong>children</strong> is not set, this will replace it.</td>
+                </tr>
+            </table>
+            <h3>Sample code:</h3>
+            <pre>
+const el = Wolfuix.createElement("div", { style: "font-size: 18px; color: green" }, [
+            Wolfuix.createElement("ul", { style: "margin-left: 1.3rem; font-size: 13px" }, [
+                Wolfuix.createElement("li", {}, "JS"),
+                Wolfuix.createElement("li", {},"PHP"),
+                Wolfuix.createElement("li", {},"Java")
+            ])
+        ], "List appended by Wolfuix:");</pre>
+            <h3>Result:</h3>
+            <div id="create-el-sample"></div>
+            <hr>
+            <p>
+                Now let's move on to the next library - <strong>WolfuixElemFactory</strong>. This library contains two static methods - getElem and getElems.
+            </p>
+            <h2>WolfuixElemFactory.getElem</h2>
+            <p>
+                Simple, but useful method. It takes one parameter => If the value passed in parameter is the element, it will just simply return it back.
+                If the parameter contains one of these chars: <strong>.#[]=,* and space</strong>, then it will return <strong>document.querySelectorAll</strong>,
+                otherwise it will return <strong>document.getElementById</strong>.
+            </p>
+            <h3>Sample code:</h3>
+            <pre>
+WolfuixElemFactory.getElem("some-id")
+                // returns the element selected by given id
+WolfuixElemFactory.getElem(".some-class[something=value]")
+                // returns the elements which contains class <strong>.some-class</strong>
+                // and has attribute <strong>something</strong> which equals to "value".
+            </pre>
+            <h2>WolfuixElemFactory.getElems</h2>
+            <p>
+                This method uses the previous one to select particular elements. This method has two parameters, the object as first and boolean as second.
+                Simply in the first parameter you pass the object with the selectors, of course you could pass either an array or a regular object
+                and this method takes all values and selects elements and returns them, also it will parse the values from nested objects.
+                The second parameter is for strict checking of selected elements, when this method attempts to select an element and fails on this
+                (operation returned null), it will show a warning in the console. But if you set the value on <strong>false</strong> this will never happen.
+                You should turn this off on the production.
+            </p>
+            <h3>Sample codes:</h3>
+            <h4>A simple array</h4>
+            <pre>
+WolfuixElemFactory.getElems(["create-el-sample", "some-invalid Selector"])</pre>
+            <h5>On this page it would return this array:</h5>[div#create-el-sample, NodeList(0)]
+            <hr>
+            <h4>A simple object</h4>
+            <pre>
+WolfuixElemFactory.getElems({
+    el: "create-el-sample",
+    invalid: "some-invalid Selector"
+})</pre>
+            <h5>On this page it would return this object:</h5>{el: div#create-el-sample, invalid: NodeList(0)}
+            <hr>
+            <h4>An object within array</h4>
+            <pre>
+WolfuixElemFactory.getElems(["selector-in-array", {
+    el: "create-el-sample",
+    invalid: "some-invalid Selector"
+  }
+])</pre>
+            <h5>On this page it would return this array:</h5>[null, {el: div#create-el-sample, invalid: NodeList(0)}]
+        </div>
+
+        <div id="tab2-container-formdata">
+            <p>
+                This is probably the most sophisticated module in the entire framework. It packs really useful methods to significant simplification
+                to work with forms. You can get the data from the form as JSON, FormData object, regular object or in an array.
+            </p>
+            <p>
+                First you need to do is make an instance of WolfuixFormData object by calling its constructor. Constructor takes two parameters
+                and none of them are compulsory.
+            </p>
+            <h3>Parameters</h3>
+            <p>
+                First is <strong>id</strong> of your form element and the second is array of allowed input types.
+                By default there are turned off following input types: <strong>checkbox, radio, hidden, reset, button, submit</strong>.
+                You can specify, what kind of these input types you want to also get, or even what types you want to disable, or what only types
+                you want to select. In case of checkboxes and radio buttons,
+                WolfuixFormData doesn't take its value attribute but <strong>checked</strong> attribute.
+            </p>
+            <h3>Usage</h3>
+            <pre>const formData = new WolfuixFormData(); // inits an instance with empty data</pre>
+            <p>
+                When you want to select a particular form, then just fill a first parameter,
+                for example on this page I have there form with id "test-form", so:
+            </p>
+            <pre>const formData = new WolfuixFormData("test-form");</pre>
+            <p>
+                Now how to use the second parameter? It's rather simple, it's just an array of "flags", for example to enable checkboxes and radios:
+            </p>
+            <pre>const formData = new WolfuixFormData("test-form", ["checkbox", "radio"]);</pre>
+            <p>
+                You want to also disable text inputs? No problem at all:
+            </p>
+            <pre>const formData = new WolfuixFormData("test-form", ["checkbox", "radio", "!text"]);</pre>
+            <p>
+                Or you just want to enable checkboxes?
+            </p>
+            <pre>const formData = new WolfuixFormData("test-form", ["allow only checkbox"]);</pre>
+            <p>
+                And radio buttons?
+            </p>
+            <pre>const formData = new WolfuixFormData("test-form", ["allow only checkbox, radio"]);</pre>
+
+            <h3>Instance methods</h3>
+
+            <table>
+                <tr>
+                    <th>Name</th>
+                    <th>Parameters</th>
+                    <th>Note</th>
+                </tr>
+                <tr>
+                    <td>append</td>
+                    <td>name, value</td>
+                    <td>Adds manually an entry to your instance of WolfuixFormData</td>
+                </tr>
+                <tr>
+                    <td>entries</td>
+                    <td></td>
+                    <td>Returns an array of keys and values</td>
+                </tr>
+                <tr>
+                    <td>keys</td>
+                    <td></td>
+                    <td>Returns an array of keys</td>
+                </tr>
+                <tr>
+                    <td>serialize</td>
+                    <td></td>
+                    <td>Serialize a form instance to the string</td>
+                </tr>
+                <tr>
+                    <td>toJSON</td>
+                    <td></td>
+                    <td>Returns a JSON of keys and values</td>
+                </tr>
+                <tr>
+                    <td>values</td>
+                    <td></td>
+                    <td>Returns an array of values</td>
+                </tr>
+                <tr>
+                    <td>valuesAsFormData</td>
+                    <td></td>
+                    <td>Returns a new instance of FormData</td>
+                </tr>
+                <tr>
+                    <td>valuesAsObject</td>
+                    <td></td>
+                    <td>Returns an object of keys and values</td>
+                </tr>
+            </table>
+
+            <p>Usage of these methods you can also find on the <a href="index.html">homepage</a>.</p>
+
+            <h3>Example form</h3>
+
+            <form action="" id="test-form" class="text-center">
+                <input type="text" name="test-form-name" placeholder="name">
+                <input type="number" name="test-form-number" placeholder="number" value="20">
+                <select name="test-form-select">
+                    <option>Option 1</option>
+                    <option>Option 2</option>
+                </select>
+                <br>
+                <input type="checkbox" name="i-agree" id="i-agree">
+                <label for="i-agree">I agree...</label><br>
+                <button id="form-data-submit" class="btn" type="submit">Submit</button>
+            </form>
+
+            <p><strong>["allow only number"]</strong>: <span id="allow-num"></span></p>
+            <p><strong>["!select-one", "checkbox"]</strong>: <span id="disable-select"></span></p>
+            <p><strong>["checkbox"]</strong>: <span id="enable-checkbox-submit"></span></p>
+
+        </div>
+
+        <div id="tab2-container-graph">
+            <p>
+                Do you want to make some graphs? Then you can use <strong>WolfuixGraph</strong> module.
+                First thing you need to have is the canvas.
+                Second make an instance of WolfuixGraph, you shouldn't forget to specify some properties for your instance.
+                Constructor takes one parameter and takes an object, it could look something like this:
+            </p>
+            <pre>
+const graph = new WolfuixGraph({
+     target: "test-graph",
+     lineWidth: 20
+});</pre>
+            <p>
+                We passed an object with two properties, <strong>target</strong> - that is your html element (canvas),
+                and <strong>lineWidth</strong> which affects the thickness of the graph.
+            </p>
+            <p>
+                Now we should draw some fancy graph on our canvas, right?
+                We will need <strong>x</strong>, <strong>y</strong> and <strong>radius</strong>, this will affect the position and size.
+                Then we pass an array of parts for our graph, we can specify color and percent.
+            </p>
+            <pre>
+graph.drawGraph({
+      x: 80,
+      y: 60,
+      radius: 60,
+      parts: [
+            { percent: 20, color: "#7025b4" },
+            { percent: 43, color: "#aa3120" }
+      ]
+});</pre>
+            <h3>Result</h3>
+            <canvas id="test-graph" class="m-auto d-block" width="160" height="140"></canvas>
+        </div>
+    </div>
+</div>
+
+
+</body>
+</html>

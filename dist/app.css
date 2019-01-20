@@ -9,6 +9,10 @@ body {
     margin: 5rem 0;
 }
 
+.clear-body {
+    margin: 53px 0 0;
+}
+
 h1, h2, h3, h4, h5, p {
     margin: 1rem;
 }
@@ -49,13 +53,37 @@ nav {
     align-items: center;
 }
 
+nav a {
+    color: #fff !important;
+}
+
 nav > img {
     margin: .2rem;
 }
 
+nav > .nav__btn {
+    padding: 16px;
+    cursor: pointer;
+    transition: .3s;
+    user-select: none;
+}
+
+nav > .nav__btn:hover {
+    background: #5c5c5c;
+}
+
+nav > .nav__btn.active {
+    background: #6f6f6f;
+}
+
 .nav__wolfuix {
     color: #fff;
+    padding: 0 .5rem;
     font-size: 2rem;
+}
+
+a {
+    text-decoration: none;
 }
 
 pre {
@@ -63,9 +91,14 @@ pre {
     overflow: auto;
     padding: .5rem;
     color: #fff;
-    height: 300px;
     font-size: 14px;
     background: #3a3a3a;
+    margin: 2rem 0;
+}
+
+.main-pre {
+    height: 300px;
+    margin: 0;
 }
 
 .btn {
@@ -93,7 +126,7 @@ pre {
     text-align: center;
 }
 
-input[type=text] {
+input, select {
     font-size: 16px;
     padding: .7rem;
     margin: .4rem 0;
@@ -105,6 +138,34 @@ input[readonly] {
     background: #ebebeb;
 }
 
+input[type=checkbox] {
+    width: auto;
+}
+
 p {
     font-size: 17px;
+}
+
+.d-flex {
+    display: flex;
+}
+
+.ml-1 {
+    margin-left: .3rem;
+}
+
+.ml-none {
+    margin-left: 0;
+}
+
+.m-auto {
+    margin: auto;
+}
+
+.main-nav-btn {
+    padding: 2.5px !important;
+}
+
+.d-block {
+    display: block;
 }
