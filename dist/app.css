@@ -80,6 +80,7 @@ nav > .nav__btn.active {
     color: #fff;
     padding: 0 .5rem;
     font-size: 2rem;
+    line-height: 3rem;
 }
 
 a {
@@ -89,16 +90,19 @@ a {
 pre {
     font-family: Consolas, sans-serif;
     overflow: auto;
-    padding: .5rem;
+    padding: 1rem;
     color: #fff;
     font-size: 14px;
-    background: #3a3a3a;
+    background: #121a34;
     margin: 2rem 0;
+    border-radius: 10px;
 }
 
 .main-pre {
     height: 300px;
     margin: 0;
+    background: #3a3a3a;
+    border-radius: 0;
 }
 
 .btn {

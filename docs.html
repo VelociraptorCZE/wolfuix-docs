@@ -2,10 +2,12 @@
 <html lang="en" data-page="docs">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Wolfuix - docs</title>
     <link rel="stylesheet" href="dist/app.css">
     <link rel="stylesheet" href="dist/docs.css">
     <script async defer src="dist/app.js"></script>
+    <link rel="shortcut icon" href="favicon.ico">
 </head>
 <body class="clear-body">
 
@@ -23,6 +25,7 @@
         <div id="tab2-btn-elems">Elements</div>
         <div id="tab2-btn-formdata">WolfuixFormData</div>
         <div id="tab2-btn-graph">WolfuixGraph</div>
+        <div id="tab2-btn-dynamiccomponent">DynamicComponent</div>
     </div>
 
     <div class="tab-layout__containers docs-container">
@@ -32,9 +35,9 @@
             </p>
             <pre>"wolfuix": version</pre>
             <p>
-                So for example version 0.8.7:
+                So for example version 0.9.3:
             </p>
-            <pre>"wolfuix": "0.8.7"</pre>
+            <pre>"wolfuix": "0.9.3"</pre>
             <p>
                 Then install it:
             </p>
@@ -293,6 +296,125 @@ graph.drawGraph({
 });</pre>
             <h3>Result</h3>
             <canvas id="test-graph" class="m-auto d-block" width="160" height="140"></canvas>
+        </div>
+
+        <div id="tab2-container-dynamiccomponent">
+            <p>
+                Dynamic component could be useful when you need to make an element and fill it with some data.
+                You can use macros for variables or foreaches, then you need to have prepared some
+                JavaScript class with the properties and the html source.
+            </p>
+            <h3>Constructor parameters</h3>
+            <table>
+                <tr>
+                    <th>Name</th>
+                    <th>Type</th>
+                    <th>Note</th>
+                </tr>
+                <tr>
+                    <td>content</td>
+                    <td>String</td>
+                    <td>Content to be rendered in your component, if this parameter isn't type of string, then it will take as content innerHTML of your target.</td>
+                </tr>
+                <tr>
+                    <td>target</td>
+                    <td>String</td>
+                    <td>I highly recommend to pass in this parameter the string with the id of your element.</td>
+                </tr>
+            </table>
+            <h3>Instance methods</h3>
+            <table>
+                <tr>
+                    <th>Name</th>
+                    <th>Parameters</th>
+                    <th>Note</th>
+                </tr>
+                <tr>
+                    <td>newTarget</td>
+                    <td>target</td>
+                    <td>Setter newTarget sets a new target for your component, in parameter pass a string, i.e.: component.newTarget = "target"</td>
+                </tr>
+                <tr>
+                    <td>bind</td>
+                    <td>context</td>
+                    <td>Sets a new context for your class, if you want to use a context the class where you made a new instance, then pass <strong>this</strong>. Returns the current instance of DynamicComponent.</td>
+                </tr>
+                <tr>
+                    <td>render</td>
+                    <td></td>
+                    <td>Parses variables and foreaches and renders your component.</td>
+                </tr>
+            </table>
+            <h3>Example</h3>
+            <h4>HTML</h4>
+            <pre>
+&lt;div id=&quot;dynamic-component-1&quot;&gt;
+      &lt;h3&gt;{{ title }}&lt;/h3&gt;
+&lt;/div&gt;</pre>
+            <h4>JS</h4>
+            <pre>
+export default class DynamicComponentExample {
+    constructor() {
+        this.title = "DynamicComponent example";
+        this.init();
+    }
+
+    init() {
+        const component = new DynamicComponent(false, "dynamic-component-1");
+        component.bind(this);
+        component.render();
+    }
+}
+
+// invoke this class somewhere else
+
+new DynamicComponentExample();</pre>
+            <h3>Result:</h3>
+            <div id="dynamic-component-1">
+                <h3>{{ title }}</h3>
+            </div>
+            <p>
+                Now we can make it even more interesting, now question is how to use a foreach in your components? Here is how:
+            </p>
+            <h4>HTML</h4>
+            <pre>
+&lt;div id=&quot;dynamic-component-2&quot;&gt;
+    &lt;h3&gt;{{ title }}&lt;/h3&gt;
+        &lt;ul&gt;
+        { foreach : props.lang : lang }
+            &lt;li&gt;{{ lang }}&lt;/li&gt;
+        {/foreach}
+        &lt;/ul&gt;
+    &lt;br&gt;
+    The second random number in the array: &lt;strong&gt;{{ randomNumbers.1 }}&lt;/strong&gt;
+&lt;/div&gt;</pre>
+            <h4>JS</h4>
+            <pre>
+export default class DynamicComponentExample {
+    constructor() {
+        this.props = { lang: ["JavaScript", "PHP", "Python"] };
+        this.title = "DynamicComponent example";
+        this.randomNumbers = Array(3).fill().map(() => Math.round(Math.random() * 20));
+        this.init();
+    }
+
+    init() {
+        const component = new DynamicComponent(false, "dynamic-component-2");
+        component.bind(this);
+        component.render();
+    }
+}</pre>
+            <h3>Result:</h3>
+            <div id="dynamic-component-2">
+                <h3>{{ title }}</h3>
+                <ul>
+                    { foreach : props.lang : lang }
+                        <li>{{ lang }}</li>
+                    {/foreach}
+                </ul>
+                <br>
+                The second random number in the array: <strong>{{ randomNumbers.1 }}</strong>
+            </div>
         </div>
     </div>
 </div>
