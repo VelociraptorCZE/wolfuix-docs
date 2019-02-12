@@ -40,13 +40,49 @@
     </div>
     <div class="tab-layout__containers">
         <div id="tab1-container-counter">
-            <pre id="code__counter_app" class="main-pre"></pre>
+            <pre id="code__counter_app" class="main-pre">
+import Wolfuix from "wolfuix/Wolfuix";
+
+const wolfuix = new Wolfuix();
+
+const button = new wolfuix.component.button("button-id");
+
+button.props = {
+    value: 0,
+    target: button.el.getElem("elem-to-print"),
+    clickHandler: () => {
+        button.props.value++;
+        button.props.target.innerText = button.props.value;
+    }
+};
+// Lower on this page this example is available
+            </pre>
         </div>
         <div id="tab1-container-array_to_object">
-            <pre id="code__array_prototype_toObject" class="main-pre"></pre>
+            <pre id="code__array_prototype_toObject" class="main-pre">
+const array = [
+    ["prop", 664],
+    ["anotherProp", "anotherValue"]
+];
+
+const obj = array.toObject(); // returns {prop: 664, anotherProp: "anotherValue"}
+            </pre>
         </div>
         <div id="tab1-container-form-data">
-            <pre id="code__form_data" class="main-pre"></pre>
+            <pre id="code__form_data" class="main-pre">
+import WolfuixFormData from "wolfuix/js/lib/WolfuixFormData";
+
+const formData = new WolfuixFormData(); // init the instance without any data
+formData.append("name", "value");
+formData.append("hours", 16);
+
+let serialized = formData.serialize(); // name=value&hours=16
+let data = formData.valuesAsFormData(); // returns the instance of FormData
+let json = formData.toJSON(); // {"name":"value","hours":16}
+let deserialized = WolfuixFormData.deserialize("name=%24value&surname=!%26%24content"); // [["name", "$value"], ["surname", "!&$content"]]
+
+console.log(serialized, data, json, deserialized)
+            </pre>
         </div>
     </div>
 </div>

@@ -1,4 +1,10 @@
-.highlight-es--window {
+/**
+ * HighlightES
+ * Copyright (c) Simon Raichl 2019
+ * MIT License
+ */
+
+.highlight-es--window, .highlight-es--native {
     color: #b20003;
 }
 
@@ -7,7 +13,11 @@
 }
 
 .highlight-es--string {
-    color: #006911;
+    color: #d9e21b;
+}
+
+.highlight-es--regex {
+    color: #69611d;
 }
 
 .highlight-es--number {
@@ -15,5 +25,19 @@
 }
 
 .highlight-es--comments {
+    color: #838581;
+}
+
+/* overriding default style - strings, comments and regex */
+
+.highlight-es--string span[class*=highlight-es] {
+    color: #d9e21b;
+}
+
+.highlight-es--regex span[class*=highlight-es] {
+    color: #69611d;
+}
+
+.highlight-es--comments span[class*=highlight-es]  {
     color: #838581;
 }
