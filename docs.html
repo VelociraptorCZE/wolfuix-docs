@@ -27,6 +27,8 @@
         <div id="tab2-btn-formdata">WolfuixFormData</div>
         <div id="tab2-btn-graph">WolfuixGraph</div>
         <div id="tab2-btn-dynamiccomponent">DynamicComponent</div>
+        <div id="tab2-btn-dragdropcomponent">Drag and Drop component</div>
+        <div id="tab2-btn-uribuilder">UriBuilder</div>
     </div>
 
     <div class="tab-layout__containers docs-container">
@@ -36,15 +38,15 @@
             </p>
             <pre>"wolfuix": version</pre>
             <p>
-                So for example version 0.9.4:
+                So for example version 0.9.8:
             </p>
-            <pre>"wolfuix": "0.9.4"</pre>
+            <pre>"wolfuix": "0.9.8"</pre>
             <p>
                 Then install it:
             </p>
             <pre>npm install</pre>
             <p>
-                Now you can use the Wolfuix, just import the main module in your JS:
+                Now you can use the Wolfuix, you can just import the main module in your JS:
             </p>
             <pre>import Wolfuix from "wolfuix/Wolfuix";
 export default class YourClass {
@@ -52,8 +54,13 @@ export default class YourClass {
         this.wolfuix = new Wolfuix();
     }
 }</pre>
+            <p>Or some other modules:</p>
+            <pre>import WolfuixFormData from "wolfuix/js/lib/WolfuixFormData";</pre>
         </div>
         <div id="tab2-container-elems">
+            <h2>Import</h2>
+            <pre>import WolfuixElemFactory from "wolfuix/js/dom/WolfuixElemFactory";
+import WolfuixElemTools from "wolfuix/js/dom/WolfuixElemTools";</pre>
             <p>
                 Working with elements is actually straightforward, you can either choose between two modules
                 - <strong>WolfuixElemTools</strong> and <strong>WolfuixElemFactory</strong>. Let's start with the first one,
@@ -105,18 +112,20 @@ const el = Wolfuix.createElement("div", { style: "font-size: 18px; color: green"
             </p>
             <h2>WolfuixElemFactory.getElem</h2>
             <p>
-                Simple, but useful method. It takes one parameter => If the value passed in parameter is the element, it will just simply return it back.
-                If the parameter contains one of these chars: <strong>.#[]=,* and space</strong>, then it will return <strong>document.querySelectorAll</strong>,
+                Simple, but useful method. It takes two parameters => If the value passed in first parameter is the element, it will just simply return it back.
+                Second parameter is the context within you to find some element, works only for querySelectorAll.
+                If first parameter contains one of these chars: <strong>.#[]=,* and space</strong>, then it will return <strong>context.querySelectorAll</strong> (context is by default document),
                 otherwise it will return <strong>document.getElementById</strong>.
             </p>
             <h3>Sample code:</h3>
             <pre>
 WolfuixElemFactory.getElem("some-id")
-                // returns the element selected by given id
+// returns the element selected by given id
+WolfuixElemFactory.getElem(".some-class", someElem)
+// returns the elements by class within someElem
 WolfuixElemFactory.getElem(".some-class[something=value]")
-                // returns the elements which contains class <strong>.some-class</strong>
-                // and has attribute <strong>something</strong> which equals to "value".
-            </pre>
+// returns the elements which contains class .some-class
+// and has attribute something which equals to "value".</pre>
             <h2>WolfuixElemFactory.getElems</h2>
             <p>
                 This method uses the previous one to select particular elements. This method has two parameters, the object as first and boolean as second.
@@ -124,7 +133,7 @@ WolfuixElemFactory.getElem(".some-class[something=value]")
                 and this method takes all values and selects elements and returns them, also it will parse the values from nested objects.
                 The second parameter is for strict checking of selected elements, when this method attempts to select an element and fails on this
                 (operation returned null), it will show a warning in the console. But if you set the value on <strong>false</strong> this will never happen.
-                You should turn this off on the production.
+                You should turn this off on the production. Final parameter is the same as in the function getElem() with same functionality.
             </p>
             <h3>Sample codes:</h3>
             <h4>A simple array</h4>
@@ -151,9 +160,11 @@ WolfuixElemFactory.getElems(["selector-in-array", {
         </div>
 
         <div id="tab2-container-formdata">
+            <h2>Import</h2>
+            <pre>import WolfuixFormData from "wolfuix/js/lib/WolfuixFormData";</pre>
             <p>
-                This is probably the most sophisticated module in the entire framework. It packs really useful methods to significant simplification
-                to work with forms. You can get the data from the form as JSON, FormData object, regular object or in an array.
+                This module packs really useful methods to provide significant simplification
+                when you work with forms. You can get the data from the form as JSON, FormData object, regular object or in an array.
             </p>
             <p>
                 First you need to do is make an instance of WolfuixFormData object by calling its constructor. Constructor takes two parameters
@@ -265,6 +276,8 @@ WolfuixElemFactory.getElems(["selector-in-array", {
         </div>
 
         <div id="tab2-container-graph">
+            <h2>Import</h2>
+            <pre>import WolfuixGraph from "wolfuix/js/lib/WolfuixGraph";</pre>
             <p>
                 Do you want to make some graphs? Then you can use <strong>WolfuixGraph</strong> module.
                 First thing you need to have is the canvas.
@@ -300,6 +313,8 @@ graph.drawGraph({
         </div>
 
         <div id="tab2-container-dynamiccomponent">
+            <h2>Import</h2>
+            <pre>import DynamicComponent from "wolfuix/js/components/DynamicComponent";</pre>
             <p>
                 Dynamic component could be useful when you need to make an element and fill it with some data.
                 You can use macros for variables or foreaches, then you need to have prepared some
@@ -405,6 +420,48 @@ export default class DynamicComponentExample {
         component.render();
     }
 }</pre>
+            You can also fill the html content in the first parameter, or even to call bind function just with constructor invocation with the same result:
+
+            <h4>HTML</h4>
+            <pre>
+&lt;div id=&quot;dynamic-component-2&quot;&gt;&lt;/div&gt;</pre>
+            <h4>JS</h4>
+            <pre>
+export default class DynamicComponentExample {
+    constructor() {
+        this.props = { lang: ["JavaScript", "PHP", "Python"] };
+        this.title = "DynamicComponent example";
+        this.randomNumbers = Array(3).fill().map(() => Math.round(Math.random() * 20));
+        this.init();
+    }
+
+    init() {
+        const component = new DynamicComponent(
+        "&lt;h3&gt;{{ title }}&lt;/h3&gt;" +
+        "&lt;ul&gt;" +
+        "{ foreach : props.lang : lang }" +
+        "    &lt;li&gt;{{ lang }}&lt;/li&gt;" +
+        "{/foreach}" +
+        "&lt;/ul&gt;" +
+        "&lt;br&gt;" +
+        "The second random number in the array: &lt;strong&gt;{{ randomNumbers.1 }}&lt;/strong&gt;", "dynamic-component-2").bind(this);
+        /* Of course you can use template literals for your html
+        `&lt;div id=&quot;dynamic-component-2&quot;&gt;
+            &lt;h3&gt;{{ title }}&lt;/h3&gt;
+                &lt;ul&gt;
+                { foreach : props.lang : lang }
+                    &lt;li&gt;{{ lang }}&lt;/li&gt;
+                {/foreach}
+                &lt;/ul&gt;
+            &lt;br&gt;
+            The second random number in the array: &lt;strong&gt;{{ randomNumbers.1 }}&lt;/strong&gt;
+        &lt;/div&gt;`
+        */
+
+        component.render();
+    }
+}</pre>
+
             <h3>Result:</h3>
             <div id="dynamic-component-2">
                 <h3>{{ title }}</h3>
@@ -417,9 +474,118 @@ export default class DynamicComponentExample {
                 The second random number in the array: <strong>{{ randomNumbers.1 }}</strong>
             </div>
         </div>
+
+        <div id="tab2-container-dragdropcomponent">
+            <h2>Import</h2>
+            <pre>import DragDropComponent from "wolfuix/js/components/DragDropComponent";</pre>
+            <p>
+                With this component you can easily make your element draggable. You need to have some element with some id,
+                you can also specify that your element can be dragged only via some element within your parent.
+            </p>
+            <h3>Constructor parameters</h3>
+            <table>
+                <tr>
+                    <th>Name</th>
+                    <th>Type</th>
+                    <th>Note</th>
+                </tr>
+                <tr>
+                    <td>target</td>
+                    <td>String</td>
+                    <td>Selects an element by this id and makes this element draggable.</td>
+                </tr>
+                <tr>
+                    <td>trigger</td>
+                    <td>String</td>
+                    <td>(Optional) Selects an element by id and the parent can be dragged only via this element. Can be undefined.</td>
+                </tr>
+                <tr>
+                    <td>cursor</td>
+                    <td>Object</td>
+                    <td>(Optional) Switches the cursors between dragged and undragged state,
+                        by default are there set "grab" and "grabbing" cursors. You can set <strong>hover</strong>
+                        property for undragged state and <strong>grabbed</strong> property.
+                        Example: { hover: "default", grabbed: "pointer" }
+                    </td>
+                </tr>
+            </table>
+
+            <h3>Examples</h3>
+
+            <pre>new DragDropComponent("drag-example-1");</pre>
+
+            <pre>new DragDropComponent("drag-example-2", "drag-example-2__trigger");</pre>
+
+            <pre>new DragDropComponent("drag-example-3", void 0, { hover: "default", grabbed: "pointer" });</pre>
+
+            <div id="drag-example-1" class="dragdrop">
+                <div class="dragdrop__trigger">Example</div>
+                <p class="dragdrop__content">Some content...</p>
+            </div>
+
+            <div id="drag-example-2" class="dragdrop" style="left:70px">
+                <div id="drag-example-2__trigger" class="dragdrop__trigger">Drag this</div>
+                <p class="dragdrop__content">Some content...</p>
+            </div>
+
+            <div id="drag-example-3" class="dragdrop" style="left:150px">
+                <div class="dragdrop__trigger">Final example</div>
+                <p class="dragdrop__content">Some content...</p>
+            </div>
+        </div>
+
+        <div id="tab2-container-uribuilder">
+            <h2>Import</h2>
+            <pre>import UriBuilder from "wolfuix/js/lib/UriBuilder";</pre>
+
+            This library helps to create URIs, you can specify a lots of parameters in the constructor, also it's possible
+            to add or remove various queries.
+
+            <h3>Instance methods</h3>
+            <table>
+                <tr>
+                    <th>Name</th>
+                    <th>Parameters</th>
+                    <th>Note</th>
+                </tr>
+                <tr>
+                    <td>uri</td>
+                    <td></td>
+                    <td>Getter <strong>uri</strong> returns your full uri with your queries.</td>
+                </tr>
+                <tr>
+                    <td>setQuery</td>
+                    <td>name, value</td>
+                    <td>Sets a query with the given parameters in the final uri is this query appended or if is present then replaced with pattern <strong>name=value</strong></td>
+                </tr>
+                <tr>
+                    <td>removeQuery</td>
+                    <td>name</td>
+                    <td>Removes a query, if this query is already present in the uri it won't be removed.</td>
+                </tr>
+            </table>
+
+            <h3>Examples</h3>
+
+            <pre>const uriBuilder = new UriBuilder();
+console.log(uriBuilder.uri); // returns https://
+uriBuilder.host = "sample.com";
+console.log(uriBuilder.uri); // returns https://sample.com</pre>
+
+            <h4>Adding and removing queries</h4>
+
+            <pre>const uriBuilder = new UriBuilder("", "http://another-sample.com");
+uriBuilder.setQuery("name", "John");
+uriBuilder.setQuery("number", 825);
+uriBuilder.host = uriBuilder.uri; // http://another-sample.com?name=John&number=825
+uriBuilder.setQuery("number", 57);
+uriBuilder.setQuery("number2", 59);
+console.log(uriBuilder.uri); // http://another-sample.com?name=John&number=57&number2=59
+uriBuilder.removeQuery("number2");
+console.log(uriBuilder.uri); // http://another-sample.com?name=John&number=57 </pre>
+
+        </div>
     </div>
 </div>
-
-
 </body>
 </html>

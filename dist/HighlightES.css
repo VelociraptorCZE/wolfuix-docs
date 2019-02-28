@@ -5,11 +5,11 @@
  */
 
 .highlight-es--window, .highlight-es--native {
-    color: #b20003;
+    color: #ed3410;
 }
 
 .highlight-es--keyword {
-    color: #be5b00;
+    color: #3fed00;
 }
 
 .highlight-es--string {
@@ -21,7 +21,7 @@
 }
 
 .highlight-es--number {
-    color: #126371;
+    color: #25dff9;
 }
 
 .highlight-es--comments {
