@@ -29,6 +29,8 @@
         <div id="tab2-btn-dynamiccomponent">DynamicComponent</div>
         <div id="tab2-btn-dragdropcomponent">Drag and Drop component</div>
         <div id="tab2-btn-uribuilder">UriBuilder</div>
+        <div id="tab2-btn-random">Random</div>
+        <div id="tab2-btn-array">Arrays</div>
     </div>
 
     <div class="tab-layout__containers docs-container">
@@ -57,6 +59,7 @@ export default class YourClass {
             <p>Or some other modules:</p>
             <pre>import WolfuixFormData from "wolfuix/js/lib/WolfuixFormData";</pre>
         </div>
+
         <div id="tab2-container-elems">
             <h2>Import</h2>
             <pre>import WolfuixElemFactory from "wolfuix/js/dom/WolfuixElemFactory";
@@ -561,7 +564,7 @@ export default class DynamicComponentExample {
                 <tr>
                     <td>removeQuery</td>
                     <td>name</td>
-                    <td>Removes a query, if this query is already present in the uri it won't be removed.</td>
+                    <td>Removes a query, if this query is already present in the host string it won't be removed.</td>
                 </tr>
             </table>
 
@@ -585,6 +588,78 @@ uriBuilder.removeQuery("number2");
 console.log(uriBuilder.uri); // http://another-sample.com?name=John&number=57 </pre>
 
         </div>
+
+        <div id="tab2-container-random">
+            <h2>Import</h2>
+            <pre>import Random from "wolfuix/js/lib/Random";</pre>
+
+            <p>
+                This tiny library deals with random numbers. Both of two instance methods does have the same parameters with the
+                same defaults => Number.MIN_SAFE_INTEGER for <strong>min</strong> and Number.MAX_SAFE_INTEGER for <strong>max</strong>.
+            </p>
+
+            <h3>Instance methods</h3>
+            <table>
+                <tr>
+                    <th>Name</th>
+                    <th>Parameters</th>
+                    <th>Note</th>
+                </tr>
+                <tr>
+                    <td>next</td>
+                    <td>min, max</td>
+                    <td>Returns a pseudo random integer in range min to max</td>
+                </tr>
+                <tr>
+                    <td>nextFloat</td>
+                    <td>min, max</td>
+                    <td>Returns a pseudo random float in range min to max</td>
+                </tr>
+            </table>
+
+            <pre>const rnd = new Random();
+console.log(rnd.next(20, 60)); // i.e. 27
+console.log(rnd.nextFloat(5, 10)); // i.e. 7.180721176416264</pre>
+        </div>
+
+        <div id="tab2-container-array">
+            <h2>Import</h2>
+            <pre>import "wolfuix/js/lib/Arrays";</pre>
+
+            <h3>Array.prototype.intersect</h3>
+            <p>
+                This function returns an array with values which are included in both given arrays.
+            </p>
+            <pre>[0, 1, 2, 3, 6, "6", "6"].intersect(["6", 3, 5]); // [3, "6", "6"]</pre>
+
+            <h3>Array.prototype.copy</h3>
+            <p>
+                Copies an array to another array. You can pass three parameters, first is the array, second is the first index to be copied
+                - by default the value is set to 0, and third is the length by default set to 1
+                and everything between these two numbers is copied to target array.
+            </p>
+            <pre>[0, 1, 2, 3, 4].copy([5, 6, 7]); // [0, 1, 2, 3, 4, 5]
+[0, 1, 2, 3, 4].copy([5, 6, 7], 0, 3); // [0, 1, 2, 3, 4, 5, 6, 7]
+[0, 1, 2, 3, 4].copy([5, 6, 7], -1); // [0, 1, 2, 3, 4, 7]</pre>
+
+            <h3>Array.prototype.like</h3>
+            <p>
+                Returns an array with items which includes value of passed in the parameter.
+            </p>
+            <pre>["Some", "great", "values", "value"].like("val"); // ["values", "value"]</pre>
+
+            <h3>Array.prototype.toObject</h3>
+            <p>
+                Converts an array to the object, eventually this function will be implemented as Object.fromEntries polyfill.
+            </p>
+            <pre>[["number", 485], ["key", "value"]].toObject(); // {number: 485, key: "value"}</pre>
+
+            <pre>let o = { first: 2, second: 4 };
+const array = Object.entries(o).map(([key, value]) => [key, value ** value]);
+o = array.toObject(); // {first: 4, second: 256} </pre>
+
+        </div>
+
     </div>
 </div>
 </body>
